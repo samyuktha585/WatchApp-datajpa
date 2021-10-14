@@ -1,0 +1,38 @@
+package com.leagueapp;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.leagueapp.model.League;
+import com.leagueapp.model.Owner;
+import com.leagueapp.repository.IOwnerRepository;
+import com.leagueapp.service.ILeagueService;
+import com.leagueapp.service.IOwnerService;
+
+@SpringBootApplication
+public class SpringLeagueappDatajpaApplication implements CommandLineRunner {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringLeagueappDatajpaApplication.class, args);
+	}
+@Autowired
+ILeagueService leagueService;
+@Autowired
+IOwnerService ownerService;
+	@Override
+	public void run(String... args) throws Exception {
+		Owner owner = new Owner("Joey","Bangalore","Architect");
+		League league = new League();
+		league.setName("winter League");
+		league.setDurationInMonths(6);
+		league.setCountry("India");
+		league.setOwner(owner);
+		System.out.println("added"+leagueService.addLeague(league));
+	//League onLeague = leagueService.getById(1);
+	//leagueService.deleteLeague(2);
+		Owner owner = ownerService.getById(100);
+	}
+
+}

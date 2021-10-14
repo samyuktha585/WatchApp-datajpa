@@ -1,0 +1,5 @@
+package com.leagueapp.service;
+
+public class ILeagueService {
+
+}

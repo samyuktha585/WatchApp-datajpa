@@ -1,0 +1,85 @@
+package com.leagueapp;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.leagueapp.model.Board;
+import com.leagueapp.model.League;
+import com.leagueapp.model.LeagueView;
+import com.leagueapp.model.Matches;
+import com.leagueapp.model.Sports;
+import com.leagueapp.model.SportsView;
+import com.leagueapp.model.Team;
+import com.leagueapp.service.IBoardService;
+import com.leagueapp.service.ILeagueService;
+import com.leagueapp.service.ISportService;
+
+@SpringBootApplication
+public class SpringLeagueappDatajpaApplication implements CommandLineRunner {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringLeagueappDatajpaApplication.class, args);
+	}
+@Autowired
+ILeagueService leagueService;
+@Autowired
+IBoardService boardService;
+@Autowired
+ISportService sportsService;
+	@Override
+	public void run(String... args) throws Exception {
+		Board board = new Board("Kalyan","chennai","Actor");
+		boardService.addOwner(board);
+	    
+		
+		Sports sports = new Sports("Circket","England");
+		sportsService.addSports(sports);
+		
+		Team teamOne = new Team("HK","Vasuki");
+		Team teamTwo = new Team("BR","Mani");
+		Set<Team> teams = new HashSet<>(Arrays.asList(teamOne,teamTwo));
+		Matches match1 = new Matches("HK Vs BR","Chinnapa Academy");
+	   // Matches match2 = new Matches("CSK vs KKR","Chennai Stadium");
+		Set<Matches> matches = new HashSet<>(Arrays.asList(match1));
+		match1.setTeams(teams);
+		
+		Team teamThree = new Team("CK","Rahul");
+		Team teamFour = new Team("KR","Shreeja");
+		Matches match2 = new Matches("CK vs KR","Coachin stadium");
+		Set<Team> nteams = new HashSet<>(Arrays.asList(teamThree,teamFour));
+		match2.setTeams(nteams);
+		Set<Matches> matche = new HashSet<>(Arrays.asList(match1,match2));
+		
+		League league = new League();
+		league.setName("T20");
+		league.setDurationInMonths(6);
+		league.setCountry("India");
+		league.setBoard(board);
+		league.setMatch(matches);
+		league.setSports(sports);
+		//System.out.println("added"+ownerService.addOwner(owner));
+		System.out.println("added"+leagueService.addLeague(league));
+	//League onLeague = leagueService.getById(1);
+	//leagueService.deleteLeague(2);
+		//Owner owner1 = ownerService.getById(100);
+		List<LeagueView> leagueView  = leagueService.getLeagueDetails();
+		for(LeagueView leagueDetails : leagueView)
+		{
+			System.out.println(leagueDetails.getNAME()+"\t"+leagueDetails.getDURATION_IN_MONTHS()+"\t"+leagueDetails.getCOUNTRY());
+		}
+		List<SportsView> sportsView  = sportsService.getSportsView();
+		for(SportsView sportsDetails : sportsView)
+		{
+			System.out.println(sportsDetails.getLEAGUENAME()+"\t"+sportsDetails.getDURATION()+"\t"+sportsDetails.getMEMBERNAME()+"\t"+sportsDetails.getSPORTSNAME()+"\t"+sportsDetails.getSQUADS());
+		}
+	}
+	System.out.println(leagueService.getLeagueCount("India"));
+
+}

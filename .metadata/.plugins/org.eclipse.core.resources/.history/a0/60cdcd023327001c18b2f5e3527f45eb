@@ -1,0 +1,44 @@
+package com.leagueapp.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.leagueapp.model.Owner;
+import com.leagueapp.repository.IOwnerRepository;
+
+@Service
+public class OwnerServiceImpl implements IOwnerService
+{
+@Autowired
+IOwnerRepository ownerRepo;
+
+	@Override
+	public Owner addOwner(Owner owner) {
+		// TODO Auto-generated method stub
+		return ownerRepo.save(owner);
+	}
+
+	@Override
+	public void updateOwner(Owner owner) {
+		ownerRepo.save(owner);		
+	}
+
+	@Override
+	public void deleteOwner(int ownerId) {
+		ownerRepo.deleteById(ownerId);		
+	}
+
+	@Override
+	public Owner getById(int ownerId) {
+		// TODO Auto-generated method stub
+		return ownerRepo.findById(ownerId).get();
+	}
+
+	@Override
+	public List<Owner> getAll() {
+		return ownerRepo.findAll();
+	}
+
+}

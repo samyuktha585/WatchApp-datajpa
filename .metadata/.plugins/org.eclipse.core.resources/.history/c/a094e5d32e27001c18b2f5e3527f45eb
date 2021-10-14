@@ -1,0 +1,42 @@
+package com.leagueapp.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.leagueapp.model.Sports;
+import com.leagueapp.repository.ISportsRepository;
+
+public class ISportsServiceImpl implements ISportService{
+@Autowired
+ISportsRepository sportsRepository;
+	@Override
+	public Sports addSports(Sports sports) {
+		return sportsRepository.save(sports);
+	}
+
+	@Override
+	public void updateSports(Sports sports) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteSports(int sportsId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Sports getById(int sportsId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Sports> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

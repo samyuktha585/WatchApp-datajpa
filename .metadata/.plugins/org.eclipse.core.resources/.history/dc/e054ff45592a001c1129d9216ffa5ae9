@@ -1,0 +1,13 @@
+package com.leagueapp.service;
+
+import java.util.List;
+
+import com.leagueapp.model.Sports;
+
+public interface ISportService {
+	Sports addSports(Sports sports);
+	void updateSports(Sports sports);
+	void deleteSports(int sportsId);
+	Sports getById(int sportsId);
+	List<Sports> getAll();
+}

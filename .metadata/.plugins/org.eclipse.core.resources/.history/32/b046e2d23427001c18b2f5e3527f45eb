@@ -1,0 +1,44 @@
+package com.leagueapp.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.leagueapp.model.Board;
+import com.leagueapp.repository.IBoardRepository;
+
+@Service
+public class BoardServiceImpl implements IBoardService
+{
+@Autowired
+IBoardRepository ownerRepo;
+
+	@Override
+	public Board addOwner(Board owner) {
+		// TODO Auto-generated method stub
+		return ownerRepo.save(owner);
+	}
+
+	@Override
+	public void updateOwner(Board owner) {
+		ownerRepo.save(owner);		
+	}
+
+	@Override
+	public void deleteOwner(int ownerId) {
+		ownerRepo.deleteById(ownerId);		
+	}
+
+	@Override
+	public Board getById(int ownerId) {
+		// TODO Auto-generated method stub
+		return ownerRepo.findById(ownerId).get();
+	}
+
+	@Override
+	public List<Board> getAll() {
+		return ownerRepo.findAll();
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.leagueapp.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.leagueapp.model.League;
+
+public interface ILeagueRepo extends JpaRepository<League, Integer>{
+
+}

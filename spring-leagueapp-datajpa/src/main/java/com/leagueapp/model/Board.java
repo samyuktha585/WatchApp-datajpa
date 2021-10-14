@@ -1,0 +1,50 @@
+package com.leagueapp.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+//@ToString
+public class Board {
+	@Id
+	@GeneratedValue(generator = "owner_gen", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "owner_gen", sequenceName = "owner_seq", initialValue = 100, allocationSize = 1)
+	Integer boardId;
+	String name;
+	String city;
+	String businessType;
+	
+	@OneToOne(mappedBy = "board")
+	@JoinColumn(name="league_id")   //use mapped by if you want to have that id only on the primary side(league)
+	League league;                   //use joinColumn if you want the foreign key(id) on both the tables
+	
+
+	public Board(String name, String city, String businessType) {
+		super();
+		this.name = name;
+		this.city = city;
+		this.businessType = businessType;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Board [name=" + name + ", city=" + city + ", businessType=" + businessType + "]";
+	}
+
+}

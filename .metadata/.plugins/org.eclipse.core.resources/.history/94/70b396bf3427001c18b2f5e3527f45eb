@@ -1,0 +1,18 @@
+package com.leagueapp.service;
+
+import java.util.List;
+
+import com.leagueapp.model.Board;
+
+public interface IBoardService {
+
+	Board addOwner(Board owner);
+
+	void updateOwner(Board owner);
+
+	void deleteOwner(int ownerId);
+
+	Board getById(int ownerId);
+
+	List<Board> getAll();
+}

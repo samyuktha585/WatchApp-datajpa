@@ -1,0 +1,5 @@
+package com.leagueapp.repository;
+
+public interface LeagueView {
+
+}
